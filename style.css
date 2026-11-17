@@ -109,3 +109,16 @@ html{scroll-behavior:smooth}
 .presentation-tip p{font-size:13px;line-height:1.9;color:#625a4d;margin-bottom:0}
 @media(max-width:700px){.reading-panel{grid-template-columns:1fr;gap:18px}.reading-tabs{gap:7px}.reading-tab{flex:1 1 100%;text-align:left}.detail-trigger{grid-template-columns:34px 1fr 22px}.detail-trigger b{font-size:17px}.detail-content{padding:0 12px 20px 46px}}
 @media(prefers-reduced-motion:reduce){.reading-panel,.detail-content{animation:none}.reading-tab,.reading-note{transition:none}}
+
+
+/* FIX: keep the landscape slide readable even if its background image fails */
+.landscape{
+  isolation:isolate;
+  background-color:#25251f;
+  background-image:linear-gradient(90deg,rgba(18,20,17,.88),rgba(18,20,17,.48)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85');
+}
+.landscape::after{display:none}
+.landscape-overlay{position:relative;z-index:2;max-width:720px}
+.landscape .eyebrow{color:#e2bd83!important;opacity:1!important}
+.landscape h2{color:#fff0d8!important;opacity:1!important;filter:none!important;text-shadow:0 2px 18px #0008}
+.landscape p:last-child{color:#eee3d1!important;opacity:1!important;text-shadow:0 1px 10px #0008}

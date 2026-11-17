@@ -13,3 +13,24 @@ const sections=$$('main section[id],header[id]');
 const navAnchors=$$('.nav-links a');
 const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navAnchors.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}}),{rootMargin:'-25% 0px -65% 0px'});
 sections.forEach(section=>activeObserver.observe(section));
+
+
+// === CINEMATIC SECTION / TEXT MOTION ===
+const wipe=document.createElement('div');wipe.className='page-wipe';wipe.setAttribute('aria-hidden','true');document.body.appendChild(wipe);
+const motionHeadings=$$('.section-heading h2,.intro h2,.verse-head h2,.meaning-grid h2,.section-body h2,.feelings h2,.closing h2');
+const headingObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('text-visible');headingObserver.unobserve(entry.target)}}),{threshold:.18});
+motionHeadings.forEach(h=>headingObserver.observe(h));
+let wipeBusy=false;
+$$('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{
+ const id=link.getAttribute('href');if(!id||id==='#')return;
+ const target=$(id);if(!target)return;
+ event.preventDefault();
+ if(wipeBusy){target.scrollIntoView({behavior:'smooth',block:'start'});return}
+ wipeBusy=true;wipe.classList.remove('wiping');void wipe.offsetWidth;wipe.classList.add('wiping');
+ setTimeout(()=>{target.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'',id);target.classList.remove('section-enter');void target.offsetWidth;target.classList.add('section-enter')},360);
+ setTimeout(()=>{wipeBusy=false;wipe.classList.remove('wiping')},900);
+}));
+const transitionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+ if(entry.isIntersecting){entry.target.classList.remove('section-enter');void entry.target.offsetWidth;entry.target.classList.add('section-enter')}
+}),{threshold:.55});
+$$('main section').forEach(section=>transitionObserver.observe(section));

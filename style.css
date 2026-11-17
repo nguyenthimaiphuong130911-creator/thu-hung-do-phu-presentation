@@ -122,3 +122,21 @@ html{scroll-behavior:smooth}
 .landscape .eyebrow{color:#e2bd83!important;opacity:1!important}
 .landscape h2{color:#fff0d8!important;opacity:1!important;filter:none!important;text-shadow:0 2px 18px #0008}
 .landscape p:last-child{color:#eee3d1!important;opacity:1!important;text-shadow:0 1px 10px #0008}
+
+
+/* FIX: the opening title must never depend on the scroll-reveal script */
+.hero-content.reveal,
+.hero-content.reveal.visible{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+}
+.hero-content h1,
+.hero-content .eyebrow,
+.hero-content .hanzi,
+.hero-content .hero-sub,
+.hero-content .hero-author,
+.hero-content .discover{
+  visibility:visible!important;
+}
+.hero-content h1{opacity:1!important;filter:none}

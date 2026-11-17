@@ -46,3 +46,34 @@ body{overflow-x:hidden}
 @keyframes glintOut{to{opacity:0;transform:scale(2.8)}}
 @media(max-width:800px){.sparkle-layer{opacity:.65}}
 @media(prefers-reduced-motion:reduce){.brand-mark,.hero:after,.hero h1,.hanzi,.time-item:before,.sparkle,.leaf{animation:none!important}.symbol-card:hover,.structure-card:hover,.value-grid>div:hover{transform:none}}
+
+
+/* === CINEMATIC TYPOGRAPHY + SECTION TRANSITIONS === */
+:root{scroll-padding-top:88px}
+html{scroll-behavior:smooth}
+.section{position:relative;isolation:isolate}
+.section::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(110deg,transparent 20%,#fff4 48%,transparent 72%);transform:translateX(-110%);z-index:0}
+.section.section-enter::after{animation:sectionGleam 1.15s ease-out}
+@keyframes sectionGleam{0%{opacity:0;transform:translateX(-110%)}25%{opacity:.45}100%{opacity:0;transform:translateX(110%)}}
+.section-heading h2,.intro h2,.verse-head h2,.meaning-grid h2,.section-body h2,.feelings h2,.closing h2{clip-path:inset(0 0 100% 0);transform:translateY(24px);opacity:0;transition:clip-path 1s cubic-bezier(.2,.75,.2,1),transform 1s cubic-bezier(.2,.75,.2,1),opacity .8s ease}
+.section-heading h2.text-visible,.intro h2.text-visible,.verse-head h2.text-visible,.meaning-grid h2.text-visible,.section-body h2.text-visible,.feelings h2.text-visible,.closing h2.text-visible{clip-path:inset(0 0 -8% 0);transform:translateY(0);opacity:1}
+.eyebrow,.section-kicker{transition:letter-spacing .8s ease,color .6s ease}
+.reveal.visible .eyebrow,.reveal.visible .section-kicker{letter-spacing:2.5px}
+.hero-content h1{animation:titleRise 1.4s cubic-bezier(.16,1,.3,1) both,titleBreath 5s ease-in-out 1.5s infinite}
+.hero-content .eyebrow{animation:fadeSlide .9s .15s both}
+.hero-content .hanzi{animation:hanziFloat 7s ease-in-out infinite,fadeSlide 1.2s .3s both}
+.hero-content .hero-sub{animation:fadeSlide 1s .75s both}
+.hero-content .hero-author{animation:fadeSlide 1s .95s both}
+.hero-content .discover{animation:fadeSlide 1s 1.15s both}
+@keyframes titleRise{from{opacity:0;transform:translateY(55px);letter-spacing:20px;filter:blur(9px)}to{opacity:1;transform:translateY(0);letter-spacing:inherit;filter:blur(0)}}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.reveal.visible p,.reveal.visible h3,.reveal.visible .inline-note{animation:fadeSlide .75s both}
+.reveal.visible p:nth-of-type(2){animation-delay:.12s}
+.reveal.visible p:nth-of-type(3){animation-delay:.22s}
+.page-wipe{position:fixed;inset:0;z-index:9999;pointer-events:none;background:linear-gradient(135deg,#211e18,#8b4936 48%,#d1aa70);transform:scaleY(0);transform-origin:bottom;opacity:.96}
+.page-wipe.wiping{animation:wipeAcross .85s cubic-bezier(.76,0,.24,1)}
+@keyframes wipeAcross{0%{transform:scaleY(0);transform-origin:bottom}45%{transform:scaleY(1);transform-origin:bottom}55%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:top}}
+.nav-links a{position:relative}
+.nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:-7px;height:1px;background:var(--gold);transition:right .35s ease}
+.nav-links a:hover:after,.nav-links a.active:after{right:0}
+@media(prefers-reduced-motion:reduce){.page-wipe{display:none}.section::after{display:none}.section-heading h2,.intro h2,.verse-head h2,.meaning-grid h2,.section-body h2,.feelings h2,.closing h2{clip-path:none;transform:none;opacity:1;transition:none}}

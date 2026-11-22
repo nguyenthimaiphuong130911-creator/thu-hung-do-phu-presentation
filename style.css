@@ -22,3 +22,20 @@
 @media(max-width:850px){.slide{padding:92px 6vw 82px}.two,.author-layout,.analysis-grid{grid-template-columns:1fr;gap:20px}.portrait{display:none}.mind-grid{grid-template-columns:repeat(3,1fr)}.mind-grid article:last-child{grid-column:span 3}}
 @media(max-width:600px){.topbar{height:57px;padding:0 15px}.slide{padding:78px 21px 76px;justify-content:flex-start}.cover{justify-content:center}.cover h1{font-size:54px;letter-spacing:6px}.hanzi{font-size:60px;letter-spacing:12px}.slide h2{font-size:37px;margin-top:22px}.two{margin-top:25px}.big{font-size:13px}.stats{gap:22px}.timeline{padding-left:20px;margin-left:5px}.timeline article{grid-template-columns:45px 1fr;gap:10px;padding-bottom:13px}.timeline article:before{left:-26px}.timeline article>b{font-size:23px}.timeline h3{font-size:15px}.timeline p{font-size:10px}.landscape-copy{margin-top:60px}.landscape-copy h2{font-size:48px}.cards,.reading{grid-template-columns:1fr;gap:10px}.cards article{padding:18px}.original{grid-template-columns:1fr;gap:0;margin-top:15px}.original p{font-size:17px;line-height:1.42;text-align:center}.poem-sign{display:none}.reading>div:first-child{border:0;border-bottom:1px solid #cdbfa8;padding:0 0 15px}.reading p{font-size:12px}.structure article{min-height:0;padding:18px}.arrow{transform:rotate(90deg)}.analysis-grid{gap:18px}.verse{padding:17px 10px}.verse p{font-size:16px}.analysis-grid .prose{font-size:11px}.symbols{grid-template-columns:1fr 1fr;gap:7px}.symbols article{padding:13px;min-height:130px}.symbols h3{font-size:15px}.symbols p{font-size:9px}.art-list article{grid-template-columns:30px 1fr;gap:10px}.art-list h3{font-size:15px}.art-list p{font-size:10px}.mind-grid{grid-template-columns:1fr 1fr}.mind-grid article:last-child{grid-column:span 2}.mind-grid p{font-size:8px}.controls{bottom:10px;gap:9px;padding:5px 8px}.controls button{width:28px;height:28px}.controls #dots{gap:4px;max-width:52vw}.dot{width:5px;height:5px}.dot.active{width:14px}#overview{padding:60px 18px}#overviewGrid{grid-template-columns:repeat(2,1fr);gap:8px}.overview-card{min-height:78px;padding:11px}.overview-card span{font-size:19px}.overview-card b{font-size:9px}.closing h2{font-size:42px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Final motion pass: stable cover + directional slide transitions */
+.cover-text,.cover h1,.cover .hanzi{animation:none!important;transform:none!important;filter:none!important;will-change:auto!important}
+.cover h1{font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+.cover .hanzi{animation:none!important;text-shadow:0 0 18px #d4b57e22}
+.cover .moon,.cover .mist{animation:none!important;filter:none!important;will-change:auto!important}
+.cover .moon{transform:none!important;box-shadow:0 0 65px #d4b57e22}
+.cover .mist{opacity:.35;transform:none!important}
+.slide{transition:opacity .52s ease,transform .62s cubic-bezier(.22,.72,.2,1),visibility 0s linear .62s}
+.slide.active{transition:opacity .52s ease,transform .62s cubic-bezier(.22,.72,.2,1),visibility 0s}
+.slide.exit-left,.slide.exit-right{visibility:visible;z-index:3;opacity:0}
+.slide.exit-left{transform:translate3d(-48px,0,0)}
+.slide.exit-right{transform:translate3d(48px,0,0)}
+.slide.active.enter-next,.slide.active.enter-prev{visibility:visible;opacity:0}
+.slide.active.enter-next{transform:translate3d(48px,0,0)}
+.slide.active.enter-prev{transform:translate3d(-48px,0,0)}
+@media(prefers-reduced-motion:reduce){.slide,.slide.active,.slide.exit-left,.slide.exit-right{transition:none!important;transform:none!important;opacity:1!important}}
